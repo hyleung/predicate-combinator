@@ -25,6 +25,12 @@ class PredicateSpec extends FlatSpec with Matchers {
 
 		List(3, 5, 2).filter(odd and divisibleBy5 ) should be (List(5))
 	}
+	"example from README" should "actually work" in {
+		val even = Predicate[Int](x => x % 2 == 0)
+		val divisible_by_5 = Predicate[Int](x => x % 5 == 0)
+
+		List.range(1,11).filter(even and divisible_by_5) should be (List(10))
+	}
 
 	def divisibleBy(i:Int):Predicate[Int] = Predicate( x => x % i == 0)
 
