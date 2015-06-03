@@ -8,8 +8,8 @@ package com.example
  */
 class Predicate[A](val pred:A => Boolean) extends (A => Boolean) {
 	def apply(v1: A): Boolean = pred(v1)
-	def &&(that:A => Boolean):Predicate[A] = new Predicate[A](x => pred(x) && that(x))
-	def ||(that:A => Boolean):Predicate[A] = new Predicate[A](x => pred(x) || that(x))
+	def and(that:A => Boolean):Predicate[A] = new Predicate[A](x => pred(x) && that(x))
+	def or(that:A => Boolean):Predicate[A] = new Predicate[A](x => pred(x) || that(x))
 	def unary_! = new Predicate[A](x => !pred(x))
 }
 
