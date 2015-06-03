@@ -15,4 +15,7 @@ class Predicate[A](val pred:A => Boolean) extends (A => Boolean) {
 
 object Predicate{
 	def apply[A] (p: A => Boolean):Predicate[A] = new Predicate[A](p)
+	object Implicits {
+		implicit def predicate[A](p: A => Boolean):Predicate[A] = new Predicate[A](p)
+	}
 }
