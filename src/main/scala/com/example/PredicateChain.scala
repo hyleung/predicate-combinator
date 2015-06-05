@@ -28,4 +28,5 @@ class PredicateChain[A](chain:Seq[Predicate[A]]) {
 
 object PredicateChain {
 	def apply[A](p:Predicate[A]) = new PredicateChain(Seq(p))
+	def apply[A](ps:Predicate[A]*) = new PredicateChain[A](ps.toList)
 }
