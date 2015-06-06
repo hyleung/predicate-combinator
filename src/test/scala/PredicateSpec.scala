@@ -32,7 +32,7 @@ class PredicateSpec extends FlatSpec with Matchers {
 		List.range(1,11).filter(even and divisible_by_5) should be (List(10))
 	}
 	"using implicit wrapper" should "also work" in {
-		import Predicate.Implicits.predicate
+		import Predicate.Implicits.predicateConverter
 		val even = (x:Int) => x % 2 == 0
 		val divisible_by_5 = (x:Int) => x % 5 == 0
 

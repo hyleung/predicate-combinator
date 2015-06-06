@@ -41,5 +41,19 @@ class PredicateChainSpec extends FlatSpec with Matchers {
 		val chain = (ten_or_greater and twenty_or_less) ~> divisibleBy5
 		chain.execute(Range(1,20)) should be (Range(10,20))
 	}
+	it should "convert Traversable to 'chain filterable'" in {
+		import PredicateChain.Implicits.convertToChainFilterable
+		val chain = even ~> divisibleBy5
+		List(3,4,5,2,10).filter(chain) should be (List(4,2,10))
+	}
+	it should "work with the kitchen sink" in {
+		import PredicateChain.Implicits.convertToChainFilterable
+		import Predicate.Implicits.predicateConverter
+		List(3,4,5,2,10)
+			.filter(
+				((x:Int) => x % 2 == 0) ~>
+				((y:Int) => y % 5 == 0)) should be (List(4,2,10))
+	}
+
 	def divisibleBy(i:Int):Predicate[Int] = Predicate( x => x % i == 0)
 }

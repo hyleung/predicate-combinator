@@ -26,7 +26,14 @@ class PredicateChain[A](chain:Seq[Predicate[A]]) {
 	def ~>(next:Predicate[A]):PredicateChain[A] = new PredicateChain(chain :+ next)
 }
 
+class PredictChainFilterable[T](target:Traversable[T]) {
+	def filter(pc:PredicateChain[T]):Traversable[T] = pc.execute(target)
+}
+
 object PredicateChain {
 	def apply[A](p:Predicate[A]) = new PredicateChain(Seq(p))
 	def apply[A](ps:Predicate[A]*) = new PredicateChain[A](ps.toList)
+	object Implicits {
+		implicit def convertToChainFilterable[A](t:Traversable[A]):PredictChainFilterable[A] = new PredictChainFilterable[A](t)
+	}
 }
