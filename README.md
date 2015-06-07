@@ -1,6 +1,6 @@
 #Predicate Combinator + Chains
 
-Implements Predicate combinator operators (as described [here](http://frankthomas.name/blog/2012/08/combining_predicates_in_scala/).), 
+Implements Predicate combinator operators (as described [here](http://frankthomas.name/blog/2012/08/combining_predicates_in_scala/)), 
 as well as predicate chain filtering. 
 
 ##Predicates
@@ -33,7 +33,9 @@ or...
 	val chain = even ~> divisibleBy5
 	chain.length should be (2)
 	
-###Implicit conversion of `Traversible[A]` to add `filter(PredicateChain[A]):Traversible[A]`
+###Implicit conversion of `Traversible[A]` 
+
+Automagically adds `filter(PredicateChain[A]):Traversible[A]` on any `Traversible[A]`.
 
 	import PredicateChain.Implicits.convertToChainFilterable
 	
