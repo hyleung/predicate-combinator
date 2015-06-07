@@ -10,6 +10,7 @@ import scala.collection.immutable.Stream.Empty
  */
 class PredicateChain[A](chain:Seq[Predicate[A]]) {
 	def execute(p:Traversable[A]):Traversable[A]  = {
+		@annotation.tailrec
 		def exec(p: Traversable[A], c: Seq[Predicate[A]]): Traversable[A] =
 			if (c.isEmpty) List.empty
 			else {
